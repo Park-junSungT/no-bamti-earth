@@ -24,3 +24,227 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ---------------------------------------------------------------- SORT IT!
+   The arcade lives in its own bright eco-tech palette so it reads the same
+   whatever the visitor's system theme is. */
+
+.si-root {
+  --si-ink: #08161f;
+  --si-ink-2: #4a6472;
+  --si-ink-3: #8aa1ad;
+  --si-surface: #ffffff;
+  --si-surface-2: #eef4f6;
+  --si-line: #d5e2e8;
+  --si-mint: #22e0a1;
+  --si-cyan: #25c9e8;
+  --si-green: #12b981;
+  --si-amber: #ffb020;
+  --si-gold: #ffc53d;
+  --si-red: #ff5470;
+  color: var(--si-ink);
+  background:
+    radial-gradient(80% 60% at 50% 0%, #f4fbfc 0%, rgba(244, 251, 252, 0) 60%),
+    linear-gradient(180deg, #eaf3f6 0%, #dfebef 100%);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.si-mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.si-surface {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  overscroll-behavior: contain;
+  display: block;
+}
+
+.si-title {
+  background: linear-gradient(105deg, #08161f 0%, #0d5c4d 45%, #12b981 70%, #25c9e8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.045em;
+}
+
+@keyframes si-pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes si-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes si-banner {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px) scale(0.9);
+  }
+  14% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  76% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+}
+@keyframes si-kick {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.22);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes si-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.14);
+  }
+}
+@keyframes si-shine {
+  0% {
+    background-position: -140% 0;
+  }
+  100% {
+    background-position: 240% 0;
+  }
+}
+@keyframes si-drift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-64px);
+  }
+}
+@keyframes si-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 224, 161, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(34, 224, 161, 0);
+  }
+}
+
+.si-pop {
+  animation: si-pop 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.si-fade {
+  animation: si-fade 0.25s ease both;
+}
+.si-banner {
+  animation: si-banner 1.7s ease both;
+}
+.si-kick {
+  animation: si-kick 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.si-beat {
+  animation: si-beat 1.1s ease-in-out infinite;
+}
+.si-glow {
+  animation: si-glow 1.8s ease-out infinite;
+}
+.si-drift {
+  animation: si-drift 1.4s linear infinite;
+}
+.si-shine {
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.85) 42%,
+    transparent 62%
+  );
+  background-size: 220% 100%;
+  animation: si-shine 2.4s ease-in-out infinite;
+}
+
+.si-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  transition:
+    transform 0.12s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+  white-space: nowrap;
+}
+.si-btn:active:not(:disabled) {
+  transform: scale(0.955);
+}
+.si-btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+.si-btn:focus-visible {
+  outline: 3px solid var(--si-cyan);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .si-pop,
+  .si-fade,
+  .si-banner,
+  .si-kick,
+  .si-beat,
+  .si-glow,
+  .si-drift,
+  .si-shine {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Short viewports (landscape phones): trade chrome for playfield. */
+@media (max-height: 560px) {
+  .si-hero-panel {
+    padding: 16px 20px;
+    border-radius: 22px;
+  }
+  .si-hero-title {
+    font-size: 46px !important;
+    line-height: 0.9 !important;
+    margin-top: 0 !important;
+  }
+  .si-hero-badge,
+  .si-hero-hint,
+  .si-hero-best,
+  .si-hud-sub {
+    display: none;
+  }
+  .si-hud-num {
+    font-size: 22px !important;
+  }
+}
